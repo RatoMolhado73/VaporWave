@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplo 3 - Vaporwave</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ----------- ESTILO VAPORWAVE/WEBCORE ----------- */
+        body {
+            background: linear-gradient(135deg, #ff8ce8, #7d6bff, #00ffd0);
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: repeat;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            padding: 40px;
+            overflow-x: hidden;
+        }
+
+        h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 24px;
+            color: #00ffff;
+            text-shadow: 2px 2px 0 #ff00ff, 4px 4px 0 #000000;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        h2::after {
+            content: " Titulo tamanho 2";
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            color: #ff00ff;
+            z-index: -1;
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(-2px, -2px);
+            }
+
+            60% {
+                transform: translate(2px, 2px);
+            }
+
+            80% {
+                transform: translate(2px, -2px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        p {
+            font-size: 16px;
+            color: #ffccff;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border: 2px dashed #ff00ff;
+            margin: 20px auto;
+            width: 60%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ff00ff;
+        }
+
+        img {
+            border: 4px double #00ffff;
+            box-shadow: 0 0 20px #ff00ff;
+            filter: contrast(1.2) saturate(1.5);
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: rotate(-2deg) scale(1.05);
+        }
+
+        a {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 15px 25px;
+            color: #000;
+            background: repeating-linear-gradient(45deg,
+                    #ff00ff,
+                    #ff00ff 10px,
+                    #00ffff 10px,
+                    #00ffff 20px);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px #fff;
+            border: 2px solid #000;
+            transition: 0.3s;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        a:hover {
+            background: #000;
+            color: #ff00ff;
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        ol {
+            list-style-type: upper-roman;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 2px solid #ffffff;
+            width: 300px;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px #ff00ff;
+        }
+
+        li {
+            margin: 10px 0;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            text-shadow: 1px 1px #000;
+        }
+
+        /* Modo Hacker e Terminal */
+        #modoHacker {
+            font-family: 'Press Start 2P', cursive;
+            padding: 10px 20px;
+            background: black;
+            color: #0f0;
+            border: 2px solid #0f0;
+            margin-top: 20px;
+            cursor: pointer;
+            box-shadow: 0 0 10px #0f0;
+            transition: all 0.3s ease;
+        }
+
+        #modoHacker:hover {
+            background: #0f0;
+            color: black;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        #terminalFake {
+            display: none;
+            background: black;
+            color: #0f0;
+            font-family: monospace;
+            padding: 20px;
+            margin-top: 30px;
+            height: 300px;
+            overflow-y: auto;
+            border: 2px solid #0f0;
+            box-shadow: 0 0 10px #0f0;
+            text-align: left;
+        }
+
+        /* VHS Effect (light scanlines) */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: repeating-linear-gradient(transparent, rgba(255, 255, 255, 0.02) 1px, transparent 2px);
+            z-index: 999;
+        }
+
+        .vhs-container {
+            width: 560px;
+            margin: 40px auto;
+            border: 6px ridge #000;
+            background: #111;
+            box-shadow: 0 0 30px #ff00ff, inset 0 0 10px #00ffff;
+            font-family: 'Press Start 2P', cursive;
+            position: relative;
+        }
+
+        .vhs-screen {
+            position: relative;
+            width: 100%;
+            background: #000;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vhs-screen video {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: brightness(0.8) contrast(1.2) saturate(0.8);
+        }
+
+        .vhs-overlay {
+            position: absolute;
+            bottom: 5px;
+            left: 10px;
+            color: #00ff00;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 8px;
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 5px #00ff00;
+            animation: blink 1s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .vhs-controls {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background: #000;
+            border-top: 4px double #333;
+        }
+
+        .vhs-btn {
+            background: #222;
+            color: #0f0;
+            border: 2px solid #0f0;
+            padding: 10px 15px;
+            font-size: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Press Start 2P', cursive;
+            box-shadow: 0 0 5px #0f0;
+        }
+
+        .vhs-btn:hover {
+            background: #0f0;
+            color: #000;
+            box-shadow: 0 0 15px #00ff00;
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="vaporwaveAudio" autoplay loop>
+        <source src="https://files.catbox.moe/8ph5u2.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <h2>Titulo tamanho 2</h2>
+
+    <p>
+        Parágrafo teste para observar como ele se comporta no DOM, poço de água doce não seca.
+    </p>
+
+    <img src="prikito.jpg" alt="PRIKITO" width="300px">
+
+    <br>
+
+    <a href="https://youtu.be/_zCgZ_AlaMY?si=ep0stRXb1TxoBGw_">FILMES GRATIS CLICA AQUI!!!</a>
+
+    <ol>
+        <li> Maçã </li>
+        <li> Pera </li>
+        <li> Uva </li>
+        <li> Salada Mista </li>
+    </ol>
+
+    <div class="vhs-container">
+        <div class="vhs-screen" id="vhsScreen">
+            <video id="vhsPlayer" autoplay loop controls style="display: block; width: 100%;">
+                <source id="videoSource" src="Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster).mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+            </video>
+            <div class="vhs-overlay" id="vhsOverlay">▶ PLAY</div>
+        </div>
+        <div class="vhs-controls">
+            <button class="vhs-btn" onclick="rew()">◀ REW</button>
+            <button class="vhs-btn" onclick="play()">▶ PLAY</button>
+            <button class="vhs-btn" onclick="stop()">■ STOP</button>
+            <button class="vhs-btn" onclick="eject()">⏏ EJECT</button>
+        </div>
+    </div>
+
+    <!-- Sons VHS -->
+    <audio id="vhsRewSound" src="https://www.soundjay.com/mechanical/sounds/mechanical-noise-4.mp3"
+        preload="auto"></audio>
+    <audio id="vhsEjectSound" src="https://www.soundjay.com/mechanical/sounds/mechanical-noise-2.mp3"
+        preload="auto"></audio>
+
+    <!-- Sons VHS -->
+    <audio id="vhsRewSound" src="https://www.soundjay.com/mechanical/sounds/mechanical-noise-4.mp3"
+        preload="auto"></audio>
+    <audio id="vhsEjectSound" src="https://www.soundjay.com/mechanical/sounds/mechanical-noise-2.mp3"
+        preload="auto"></audio>
+
+
+    <button id="modoHacker">Ativar Modo Hacker</button>
+
+    <pre id="terminalFake"></pre>
+
+    <!-- Efeito Sonoro ao clicar -->
+    <audio id="efeitoClick" src="https://www.soundjay.com/buttons/sounds/button-3.mp3" preload="auto"></audio>
+
+    <script>
+        // Som ao clicar no botão
+        document.getElementById("modoHacker").addEventListener("click", function () {
+            document.getElementById("efeitoClick").play();
+
+            const terminal = document.getElementById("terminalFake");
+            terminal.style.display = "block";
+            terminal.textContent = "";
+
+            let lines = [
+                "Iniciando protocolo 404X...",
+                "Conectando à rede subdimensionada...",
+                "Acesso concedido: VAPORWAVE_MAINFRAME",
+                "Extraindo dados: 🍇🥤🌴🌅",
+                "Injetando glitch visual... ✔",
+                "Música: ✓",
+                "Sistema Webcore Ativo.",
+                "PRIKITO DETECTADO.",
+                "Streaming habilitado.",
+                "⌛ Aguardando resposta do servidor VHS..."
+            ];
+
+            let i = 0;
+            let interval = setInterval(() => {
+                if (i < lines.length) {
+                    terminal.textContent += lines[i] + "\n";
+                    terminal.scrollTop = terminal.scrollHeight;
+                    i++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 800);
+        });
+
+        const rewSound = document.getElementById("vhsRewSound");
+        const ejectSound = document.getElementById("vhsEjectSound");
+        const overlay = document.getElementById("vhsOverlay");
+        const video = document.getElementById("vhsPlayer");
+        const videoSource = document.getElementById("videoSource");
+
+        // Lista de vídeos para trocar (adicione quantos quiser)
+        const videos = [
+            "hamud.mp4",
+            "gummyBear.mp4",
+            "hampter.mp4"
+        ];
+
+        let currentVideoIndex = 0;
+
+        function play() {
+            video.play();
+            overlay.textContent = "▶ PLAY";
+        }
+
+        function stop() {
+            video.pause();
+            overlay.textContent = "■ STOP";
+        }
+
+        function rew() {
+            rewSound.play();
+            video.currentTime = 0;
+            video.play();
+            overlay.textContent = "◀ REWINDING...";
+            setTimeout(() => {
+                overlay.textContent = "▶ PLAY";
+            }, 3000);
+        }
+
+        function eject() {
+            ejectSound.play();
+            overlay.textContent = "⏏ EJECTED";
+            video.style.display = "none";
+
+            // Próximo vídeo na lista (loop)
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+
+            setTimeout(() => {
+                videoSource.src = videos[currentVideoIndex];
+                video.load();   // Recarrega o vídeo com o novo src
+                video.style.display = "block";
+                video.play();
+                overlay.textContent = "▶ PLAY";
+            }, 4000);
+        }
+
+        // Opcional: ativar som após clique (conforme dica anterior)
+        document.addEventListener("click", () => {
+            if (video.muted) {
+                video.muted = false;
+                video.volume = 1.0;
+            }
+        }, { once: true });
+    </script>
+</body>
+
+</html>
